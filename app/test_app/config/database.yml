@@ -1,0 +1,22 @@
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: postgres
+  host: <%= ENV.fetch('dockerbdd_db_1_PORT_5432_TCP_ADDR', '172.17.42.1') %>
+  port: <%= ENV.fetch('dockerbdd_db_1_PORT_5432_TCP_PORT', '49153') %>
+  pool: 5
+
+development:
+  <<: *default
+  database: dockerbdd_db_1_development
+
+test:
+  <<: *default
+  database: dockerbdd_db_1_test
+
+production:
+  <<: *default
+  database: dockerbdd_db_1_production
+  username: test_app
+  password: <%= ENV['TEST_APP_DATABASE_PASSWORD'] %>

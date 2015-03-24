@@ -2,33 +2,14 @@
 # vi: set ft=ruby :
 require "etc"
 
-$start_zsh = <<SCRIPT
-echo Changing to zsh
-sudo chsh -s $(which zsh) $(whoami)
-SCRIPT
-
-# Must install oh-my-zsh by hand
-# Use sudo chsh -s $(which zsh) $(whoami)
-# Then restart session
-
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/trusty64"
 
   config.ssh.private_key_path = [ '~/.vagrant.d/insecure_private_key', '~/.ssh/id_rsa' ]
   config.ssh.forward_agent = false
-  
-  # config.nfs.map_uid = Process.uid
-  # config.nfs.map_gid = Process.gid
-  # config.vm.synced_folder ENV['PROJECT_DIR'], ENV['VAGRANT_PROJECT_DIR'], nfs: true
 
   config.vm.network "forwarded_port", guest: 80, host: 8000
   config.vm.network "forwarded_port", guest: 3000, host: 3000
-
-
-  # config.vm.define :devbox do |v|
-  #   v.vm.hostname = ENV['HOSTNAME']
-  #   v.vm.network :private_network, ip: server_ip
-  # end
 
   config.vm.hostname = "imhotep-dev-host"
   config.vm.network :private_network, ip: "192.168.10.101"
@@ -38,7 +19,6 @@ Vagrant.configure("2") do |config|
                               :mount_options => ['nolock,vers=3,udp,noatime']
 
   config.vm.provider :virtualbox do |vbox|
-      # vbox.name = "gogobot-devbox"
       vbox.customize ["modifyvm", :id, "--memory", 6114]
       vbox.customize ["modifyvm", :id, "--cpus", 2]
       vbox.customize ["modifyvm", :id, "--cpuhotplug", "on"]
@@ -65,13 +45,7 @@ Vagrant.configure("2") do |config|
 # Install Nodejs
   # config.vm.provision "shell", path: "scripts/nodejs.sh", privileged: false
 
-# Switch to zsh
-  # config.vm.provision "shell", inline: $start_zsh
-
-# Install OH-My-ZSH
-  # config.vm.provision "shell", path: "scripts/oh-my-zsh5.sh"
-
 # launch all the docker containers as part of provisioning
-  # config.vm.provision "shell", inline: "cd imhotep-dev && fig up -d"
+  # config.vm.provision "shell", inline: "cd imhotep-dev && docker-compose up -d"
 
 end

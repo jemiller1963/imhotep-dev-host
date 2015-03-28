@@ -1,1 +1,0 @@
-{"nfs":{"/home/vagrant/docker-bdd":{"nfs":true,"guestpath":"/home/vagrant/docker-bdd","hostpath":"/Users/jem/Documents/Projects/Rails/Development/NewDevBox","disabled":false,"type":"nfs","map_uid":501,"map_gid":80,"nfs_udp":true,"nfs_version":3,"uuid":"2449774813"}}}

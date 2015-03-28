@@ -9,30 +9,3 @@ file:
   image: busybox
   command: /bin/sh
   volumes: [/var/lib/postgresql/data/]
-# web:
-#   build: dockerfiles/nginx
-#   ports:
-#     - "80:80"
-#   volumes:
-#     - app:/www
-#   links:
-#     - app
-# app:
-#   build: dockerfiles/rails
-#   command: /opt/startup.sh
-#   ports:
-#     - "3000:3000"
-#   volumes:
-#     - example/rails:/app
-#   links:
-#     - db
-# `fig run dev` will bring us to a nice dev environment
-# where we can run commands like `rails g scaffold`
-# app:
-#   build: dockerfiles/rails
-#   ports:
-#     - "3000:3000"
-#   volumes:
-#     - .:/app
-#   links:
-#     - db

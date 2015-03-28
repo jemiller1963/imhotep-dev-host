@@ -40,12 +40,9 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "scripts/setup.sh"
 
 # Install Ruby and Rails
-  config.vm.provision "shell", path: "scripts/railsready/railsready-rvm.sh"
-
-# Install Nodejs
-  # config.vm.provision "shell", path: "scripts/nodejs.sh", privileged: false
+  config.vm.provision "shell", path: "scripts/railsready-rvm.sh"
 
 # launch all the docker containers as part of provisioning
-  # config.vm.provision "shell", inline: "cd imhotep-dev && docker-compose up -d"
+  config.vm.provision "shell", inline: "cd imhotep-dev && docker-compose up -d"
 
 end

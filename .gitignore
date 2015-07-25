@@ -38,3 +38,6 @@ Thumbs.db
 
 # Added JEM
 .vagrant/
+env.sh
+test.sh
+projects/

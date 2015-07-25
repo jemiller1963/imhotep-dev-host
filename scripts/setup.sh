@@ -7,6 +7,7 @@ sudo apt-get update -yq && sudo apt-get upgrade -yq && sudo apt-get dist-upgrade
 
 printf "\n****Installing core tools"
 sudo apt-get install git-core curl zlib1g-dev libssl-dev libxml2 libxml2-dev libxslt1-dev -yq
+sudo apt-get install libgtkmm-3.0-1 libnotify4 libraw1394-11 libgtk2.0-0 libgtkmm-2.4-dev libglademm-2.4-dev libgtkglextmm-x11-1.2-dev libusb-1.0-0 -yq
 
 printf "\n****Installing Git"
 apt-get install git -yq
@@ -51,6 +52,8 @@ printf "=== Test Installation of Compose"
 docker-compose --version
 printf "\n**** Done *****"
 
+printf "===== Install Heroku Toolbelt"
+wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
 printf "\n****Cleanup"
 apt-get clean && apt-get autoremove -yq && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

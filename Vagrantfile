@@ -5,21 +5,25 @@ require "etc"
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/trusty64"
 
-  config.ssh.private_key_path = [ '~/.vagrant.d/insecure_private_key', '~/.ssh/id_rsa' ]
-  config.ssh.forward_agent = false
+  # config.ssh.private_key_path = [ '~/.vagrant.d/insecure_private_key', '~/.ssh/id_rsa' ]
+  # config.ssh.forward_agent = false
+  # *** This uses built in Vagrant keys ***
+  config.ssh.keys_only = true
 
   config.vm.network "forwarded_port", guest: 80, host: 8000
   config.vm.network "forwarded_port", guest: 3000, host: 3000
 
   config.vm.hostname = "imhotep-dev-host"
   config.vm.network :private_network, ip: "192.168.10.101"
-  config.vm.synced_folder ".", "/home/vagrant/imhotep-dev", 
+  # config.vm.network :private_network, ip: "10.0.0.1"
+  config.vm.synced_folder ".", "/home/vagrant/imhotep-dev",
                               id: "core",
                               :nfs => true,
                               :mount_options => ['nolock,vers=3,udp,noatime']
 
   config.vm.provider :virtualbox do |vbox|
       vbox.customize ["modifyvm", :id, "--memory", 6114]
+      # vbox.customize ["modifyvm", :id, "--memory", 8192]
       vbox.customize ["modifyvm", :id, "--cpus", 2]
       vbox.customize ["modifyvm", :id, "--cpuhotplug", "on"]
       vbox.customize ["modifyvm", :id, "--cpuexecutioncap", 85]
